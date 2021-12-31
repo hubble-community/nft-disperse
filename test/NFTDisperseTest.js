@@ -13,7 +13,7 @@ describe('NFTDisperse Tests', function() {
             params: [{
                 forking: {
                     jsonRpcUrl: 'https://api.avax.network/ext/bc/C/rpc',
-                    blockNumber: 8820500 // having a consistent block number speeds up the tests across runs
+                    blockNumber: 8946051 // having a consistent block number speeds up the tests across runs
                 }
             }]
         })
@@ -21,8 +21,9 @@ describe('NFTDisperse Tests', function() {
         signers = await ethers.getSigners()
         alice = signers[0].address
 
-        NFTDisperse = await ethers.getContractFactory('NFTDisperse')
-        nftDisperse = await NFTDisperse.deploy()
+        // NFTDisperse = await ethers.getContractFactory('NFTDisperse')
+        // nftDisperse = await NFTDisperse.deploy()
+        nftDisperse = await ethers.getContractAt('NFTDisperse', '0xB61caA81b5B254Eee4f7b3a19F1b0C3C5598e27C')
 
         genesisVoter = await ethers.getContractAt('IERC721', '0x9acd85fe8a3f17fc5007da75d268e9ea989649ef')
 
