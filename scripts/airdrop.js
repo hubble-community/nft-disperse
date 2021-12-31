@@ -13,12 +13,10 @@ async function execute(signer) {
     if (tokenIds.length != recipients.length) throw 'invalid input'
     const tasks = []
 
-    let nonce = await signer.getTransactionCount()
-    // await genesisVoter.connect(signer).setApprovalForAll(nftDisperse.address, true)
-    tasks.push(genesisVoter.setApprovalForAll(nftDisperse.address, true), { nonce: nonce++ })
+    await genesisVoter.connect(signer).setApprovalForAll(nftDisperse.address, true)
 
+    let nonce = await signer.getTransactionCount()
     while (recipients.length) {
-        // await nftDisperse.connect(signer).disperse(genesisVoter.address, tokenIds.slice(0, BATCH_SIZE), recipients.slice(0, BATCH_SIZE))
         tasks.push(
             nftDisperse.disperse(genesisVoter.address, tokenIds.slice(0, BATCH_SIZE), recipients.slice(0, BATCH_SIZE), { nonce: nonce++ })
         )
